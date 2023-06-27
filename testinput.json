@@ -1,0 +1,45 @@
+[
+  {
+    "route": "/conditiontest",
+    "expectReturnCode": 200,
+    "conditions": {
+      "name": [
+        {
+          "operator": "equals",
+          "value": "john"
+        }
+      ]
+    },
+    "actions": {
+      "name": { "location": "header" }
+    }
+  },
+  {
+    "route": "/",
+    "expectReturnCode": 204
+  },
+  {
+    "route": "/",
+    "expectReturnCode": 500
+  },
+  {
+    "route": "/conditiontest",
+    "expectReturnCode": 200,
+    "conditions": {
+      "name": [
+        {
+          "operator": "equals",
+          "value": "johnny"
+        }
+      ],
+      "email": [
+        {
+          "operator": "exists"
+        }
+      ]
+    },
+    "actions": {
+      "name": { "location": "header" }
+    }
+  }
+]

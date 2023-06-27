@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .result {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+      }
+
+      .case {
+        margin-bottom: 20px;
+      }
+
+      .success {
+        background-color: rgb(46, 185, 46);
+        color: white;
+        padding: 5px;
+        border-radius: 2px;
+      }
+      .fail {
+        background-color: rgb(185, 46, 46);
+        color: white;
+        padding: 5px;
+        border-radius: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <p>{{ .Title }}</p>
+
+      <div class="result">
+        {{ range .TestCases }}
+        <div class="case">
+          <div>
+            <h4>
+              Called Route {{.Case.Route}} Expect {{.Case.ExpectReturnCode}}.
+              {{if .Success}} <span class="success">Success</span> {{else}}
+              <span class="fail">Fail</span> {{end}}
+            </h4>
+            <p>Response time: {{.ResponseTime}}</p>
+
+            {{if .ResponseBody}}
+            <p>Response:</p>
+            <code>{{.ResponseBody}}</code>
+            {{end}} {{if .ErrMessages}}
+            <h6>Error messages:</h6>
+            {{end}}
+            <ul>
+              {{range .ErrMessages}}
+              <li>{{.}}</li>
+              {{end}}
+            </ul>
+          </div>
+        </div>
+        {{end}}
+      </div>
+    </div>
+  </body>
+</html>
